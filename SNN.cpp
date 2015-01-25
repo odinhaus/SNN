@@ -461,7 +461,6 @@ void ProcessDelegate(delegateList *delegateList, eventArgs *e)
 	if (delegateList == 0) return;
 	(*delegateList->del)(delegateList->target, delegateList->sender, e);
 	ProcessDelegate(delegateList->next, e); // recurse the delegate list to invoke subsribers
-	//FreeDelegateList(delegateList);
 }
 
 void ProcessEvents(multicastDelegate *events, long t)
@@ -469,7 +468,6 @@ void ProcessEvents(multicastDelegate *events, long t)
 	if (events == 0) return;
 	ProcessDelegate(events->subscribers, events->e);
 	ProcessEvents(events->next, t);
-	//FreeMulticast(events);
 }
 
 void ProcessEventQueue(eventQueue *queue, long t)
@@ -509,7 +507,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	LoadNeurons();
 	double ticks = 1000.0;
 	double s = (double)clock() / ticks;
-	while (t < 0)
+	while (t < 1000000)
 	{
 		Run((long)t++);
 	}
